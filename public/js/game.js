@@ -7,6 +7,8 @@ var canvas,			// Canvas DOM element
 	socket;			// Socket connection
 
 
+var texture_player;
+
 // GAME INITIALISATION
 function init() {
 	// Setting up Canvas
@@ -17,6 +19,10 @@ function init() {
 
 	// Setting up Keyboard controls	
 	keys = new Keys();
+	
+	// Load resources
+	texture_player = new Image();
+	texture_player.src = "img/player.png";
 
 	// Setting up Player start location
 	var startX = Math.round(Math.random()*(canvas.width-5)),
@@ -164,7 +170,8 @@ function draw() {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 	// Draw the local player
-	localPlayer.draw(ctx);
+	localPlayer.draw(ctx,texture_player);
+		
 
 	// Draw the remote players
 	var i;

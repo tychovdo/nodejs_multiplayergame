@@ -46,8 +46,9 @@ var Player = function(startX, startY) {
 	};
 
 	// Draw player
-	var draw = function(ctx) {
-		ctx.fillRect(x-16, y-16, 32, 32);
+	var draw = function(ctx, texture_player) {
+		ctx.drawImage(texture_player,x-16,y-16);
+		// ctx.fillRect(x-16, y-16, 32, 32);
 	};
 
 	// Define which variables and methods can be accessed
