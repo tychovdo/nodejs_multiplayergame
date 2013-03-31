@@ -43,6 +43,9 @@ function onSocketConnection(client) {
 
 	// Move player
 	client.on("move player", onMovePlayer);
+
+	// Score player
+	client.on("score player", onScorePlayer);
 };
 
 // Disconnect
@@ -113,6 +116,21 @@ function onMovePlayer(data) {
 										});
 
 };
+function onScorePlayer(data) {
+	// Find player in array
+	var scorePlayer = playerById(this.id);
+	
+	// Player not found
+	if (!scorePlayer) {
+		util.log("No player to score: "+this.id);
+		return;
+	};
+
+	// Update player
+	movePlayer.setScore(data.score);
+
+	// Broadcast player
+	this.broadcast.emit("score player", { score: scorePlayer.getScore()});
 
 // GAME FUNCTIONS
 

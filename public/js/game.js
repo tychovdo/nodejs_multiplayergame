@@ -75,6 +75,9 @@ var setEventHandlers = function() {
 
 	// Player removed message received
 	socket.on("remove player", onRemovePlayer);
+
+	// Player score message received
+	socket.on("score player", onScorePlayer);
 };
 
 // Keyboard key down
@@ -151,7 +154,18 @@ function onRemovePlayer(data) {
 	// Remove player from array
 	remotePlayers.splice(remotePlayers.indexOf(removePlayer), 1);
 };
+function onScorePlayer(data) {
+	var scorePlayer = playerById(data.id);
 
+	// Player not found
+	if (!scorePlayer) {
+		console.log("Player not found: "+data.id);
+		return;
+	};
+
+	// Update player score
+	scorePlayer.setScore(data.score);
+};
 
 // GAME ANIMATION LOOP
 function animate() {
@@ -169,6 +183,7 @@ function update() {
 	if (localPlayer.update(keys)) {
 		// Send local player data to the game server
 		socket.emit("move player", {x: localPlayer.getX(), y: localPlayer.getY()});
+		socket.emit("score player", {score: localPlayer.getScore()});
 	};
 };
 

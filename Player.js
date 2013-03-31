@@ -3,6 +3,7 @@
 var Player = function(startX, startY) {
 	var x = startX,
 		y = startY,
+		score = 0,
 		id;
 
 	// Getters and setters
@@ -14,6 +15,10 @@ var Player = function(startX, startY) {
 		return y;
 	};
 
+	var getScore = function() {
+		return score;
+	};
+
 	
 	var setX = function(newX) {
 		x = newX;
@@ -22,13 +27,18 @@ var Player = function(startX, startY) {
 	var setY = function(newY) {
 		y = newY;
 	};
+	var setScore = function(newScore) {
+		score = newScore;
+	};
 
 	// Define variables
 	return {
 		getX: getX,
 		getY: getY,
+		getScore: getScore,
 		setX: setX,
 		setY: setY,
+		setScore: setScore,	
 		id: id
 	}
 };
