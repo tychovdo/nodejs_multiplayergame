@@ -17,6 +17,15 @@ function init() {
 		// canvas.width = window.innerWidth;
 		// canvas.height = window.innerHeight;
 
+	canvas.width  = window.innerWidth;
+	canvas.height = window.innerHeight;
+	canvas.height = 600;
+	
+	canvasWidth = parseInt(canvas.width);
+	canvasHeight = parseInt(canvas.height);
+	canvasTop = parseInt(canvas.style.top);
+	canvasLeft = parseInt(canvas.style.left);
+
 	// Setting up Keyboard controls	
 	keys = new Keys();
 	
