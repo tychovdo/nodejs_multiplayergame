@@ -26,7 +26,7 @@ var Player = function(startX, startY) {
 		y = newY;
 	};
 	var setScore = function(newScore) {
-		score = score;
+		score = newScore;
 	};
 
 	// Update player position
