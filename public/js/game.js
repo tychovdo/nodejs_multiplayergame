@@ -176,7 +176,7 @@ function draw() {
 	// Draw the remote players
 	var i;
 	for (i = 0; i < remotePlayers.length; i++) {
-		remotePlayers[i].draw(ctx);
+		remotePlayers[i].draw(ctx,texture_player);
 	};
 };
 
