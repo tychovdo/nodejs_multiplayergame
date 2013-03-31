@@ -127,11 +127,12 @@ function onScorePlayer(data) {
 	};
 
 	// Update player
-	movePlayer.setScore(data.score);
+	scorePlayer.setScore(data.score);
 
 	// Broadcast player
 	this.broadcast.emit("score player", { score: scorePlayer.getScore()});
 
+}
 // GAME FUNCTIONS
 
 // Find player by ID
