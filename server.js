@@ -130,7 +130,9 @@ function onScorePlayer(data) {
 	scorePlayer.setScore(data.score);
 
 	// Broadcast player
-	this.broadcast.emit("score player", { score: scorePlayer.getScore()});
+	this.broadcast.emit("score player", { 	id: scorePlayer.id, 
+											score: scorePlayer.getScore()
+										});
 
 }
 // GAME FUNCTIONS
