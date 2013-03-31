@@ -32,7 +32,7 @@ function init() {
 	localPlayer = new Player(startX, startY);
 
 	// Initialise socket connection
-	var serverIP = "http://83.163.143.101";
+	var serverIP = "83.163.143.101";
 	socket = io.connect(serverIP , {port: 1337, transports: ["websocket"]});
 
 	// Initialise remote players array
@@ -168,6 +168,9 @@ function update() {
 function draw() {
 	// Wipe the canvas clean
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	
+	ctx.fillStyle="#568BFF";
+	ctx.fillRect(0,0,canvasWidth,canvasHeight);
 
 	// Draw the local player
 	localPlayer.draw(ctx,texture_player);
