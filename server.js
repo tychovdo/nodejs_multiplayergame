@@ -109,6 +109,7 @@ function onMovePlayer(data) {
 	movePlayer.setX(data.x);
 	movePlayer.setY(data.y);
 
+
 	// Broadcast player
 	this.broadcast.emit("move player", {	id: movePlayer.id,
 											x: movePlayer.getX(),
