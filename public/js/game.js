@@ -4,7 +4,8 @@ var canvas,			// Canvas DOM element
 	keys,			// Keyboard input
 	localPlayer,	// Local player
 	remotePlayers,	// Remote players
-	socket;			// Socket connection
+	socket,			// Socket connection
+	level;
 
 
 var texture_player;
@@ -29,6 +30,9 @@ function init() {
 	// Setting up Keyboard controls	
 	keys = new Keys();
 	
+	// Level
+	level = new Level();
+
 	// Load resources
 	texture_player = new Image();
 	texture_player.src = "img/player.png";
@@ -41,7 +45,7 @@ function init() {
 	localPlayer = new Player(startX, startY);
 
 	// Initialise socket connection
-	var serverIP = "83.163.143.101";
+	var serverIP = "localhost";
 	socket = io.connect(serverIP , {port: 1337, transports: ["websocket"]});
 
 	// Initialise remote players array
@@ -78,6 +82,10 @@ var setEventHandlers = function() {
 
 	// Player score message received
 	socket.on("score player", onScorePlayer);
+
+	// New entity message received
+	socket.on("new entity", onNewEntity);
+
 };
 
 // Keyboard key down
@@ -166,6 +174,18 @@ function onScorePlayer(data) {
 	// Update player score
 	scorePlayer.setScore(data.score);
 };
+function onNewEntity(data) {
+	var entity = new Entity(data.type, data.id, data.x, data.y);
+	if(level.levelNum===data.levelNum) {
+		level.addEntity(entity);
+	} else {
+		level.clear();
+		level.levelNum = data.levelNum;
+		level.addEntity(entity);
+	}
+
+
+};
 
 // GAME ANIMATION LOOP
 function animate() {
@@ -180,7 +200,7 @@ function animate() {
 // GAME UPDATE
 function update() {
 	// Update local player and check for change
-	if (localPlayer.update(keys)) {
+	if (localPlayer.update(keys,level)) {
 		// Send local player data to the game server
 		socket.emit("move player", {x: localPlayer.getX(), y: localPlayer.getY()});
 		socket.emit("score player", {score: localPlayer.getScore()});
@@ -196,6 +216,9 @@ function draw() {
 	ctx.fillStyle="#568BFF";
 	ctx.fillRect(0,0,canvasWidth,canvasHeight);
 
+	// Draw the entities
+	level.draw(ctx,texture_player);
+
 	// Draw the local player
 	localPlayer.draw(ctx,texture_player);
 		
@@ -205,6 +228,7 @@ function draw() {
 	for (i = 0; i < remotePlayers.length; i++) {
 		remotePlayers[i].draw(ctx,texture_player);
 	};
+
 };
 
 

@@ -5,7 +5,8 @@ var Player = function(startX, startY) {
 		score = 0,
 		id,
 		moveAmount = 3;
-	
+		
+
 	// Getters and setters
 	var getX = function() {
 		return x;
@@ -29,8 +30,9 @@ var Player = function(startX, startY) {
 		score = newScore;
 	};
 
+
 	// Update player position
-	var update = function(keys) {
+	var update = function(keys, level) {
 		// Previous position
 		var prevX = x,
 			prevY = y;
