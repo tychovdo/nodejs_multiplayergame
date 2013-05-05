@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+	<head>
+		<title>Multiplayer HTML5 Game</title>
+
+		<meta charset="utf-8">
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/game.css">
+	</head>
+
+	<body>
+		<canvas id="gameCanvas" width="600" height="600"></canvas>
+		<script src="http://localhost:1337/socket.io/socket.io.js"></script>
+		<script src="js/requestAnimationFrame.js"></script>
+		<script src="js/Keys.js"></script>
+		<script src="js/Player.js"></script>
+		<script src="js/game.js"></script>
+		<script src="js/Level.js"></script>
+		<script src="js/Entity.js"></script>
+		<script>
+			// Init game
+			init();
+			animate();
+		</script>
+	</body>
+</html>

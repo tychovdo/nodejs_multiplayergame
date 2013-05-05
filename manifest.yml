@@ -1,0 +1,14 @@
+--- 
+applications: 
+  .: 
+    instances: 1
+    url: ${name}.${target-base}
+    name: jsgame
+    infra: eu-aws
+    framework: 
+      name: node
+      info: 
+        description: Node.js Application
+        exec: 
+        mem: 64M
+    mem: 64M
